@@ -1,0 +1,23 @@
+<h1>ASC Automation</h1>
+
+<%= form_for @receipt do |f| %>
+
+	<%= f.text_field :merchant, placeholder: 'Enter merchant (name)' %>
+	<br>
+	<br>
+
+	<%= f.text_field :amount, placeholder: 'Enter amount (integer)' %>
+	<br>
+	<br>
+
+	<%= f.text_field :date, placeholder: 'Enter date (eg. 2002-05-30T09:00:00)' %>
+	<br>
+	<br>
+
+	<%= f.text_field :user_id, placeholder: 'Choose a user (integer)' %>
+	<br>
+	<br>
+
+	<%= f.submit 'Get your card' %>
+
+<% end %>
