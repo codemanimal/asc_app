@@ -1,9 +1,9 @@
 class CreateCategories < ActiveRecord::Migration
   def change
     create_table :categories do |t|
-    	t.string  :type
+    	t.string  :business_type
     	t.string  :animal
-    	t.integer :price_floor
+    	t.string  :price_floor, arry: true, default: []
 
     	t.timestamps
     end

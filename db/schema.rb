@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 20151027232804) do
   add_index "brands", ["category_id"], name: "index_brands_on_category_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.string   "type"
+    t.string   "business_type"
     t.string   "animal"
-    t.integer  "price_floor"
+    t.string   "price_floor",   default: "--- []\n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

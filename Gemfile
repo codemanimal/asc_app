@@ -47,6 +47,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'pry-rails'
+	gem 'awesome_print'
 end
 
 
