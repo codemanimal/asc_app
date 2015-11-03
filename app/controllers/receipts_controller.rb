@@ -13,24 +13,39 @@ class ReceiptsController < ApplicationController
 		# Check to see if it has a card and is available
 		if brand.is_card && brand.is_available
 			print "Use this brand: " + brand.name + "\n"
-			category_type = Category.where(id: brand.category_id).business_type
-			animal = Category.where(business_type: category_type, price_floor: @receipt.amount).animal
-			print animal + "\n"
-			redirect_to root_path
+			category = Category.find_by id: brand.category_id
+			category_type = category.business_type
+			animal_entries = Category.where(business_type: category_type)
+			if animal_entries[0].price_floor.include?(@receipt.amount.to_s)
+				animal = animal_entries[0].animal.sample
+				print "Use this animal: " + animal + "\n"
+				redirect_to root_path
+			elsif animal_entries[1].price_floor.include?(@receipt.amount.to_s)
+				animal = animal_entries[1].animal.sample
+				print "Use this animal: " + animal + "\n"
+				redirect_to root_path
+			else animal_entries[2].price_floor.include?(@receipt.amount.to_s)
+				animal = animal_entries[2].animal.sample
+				print "Use this animal: " + animal + "\n"
+				redirect_to root_path
+			end
 		else
 			# Take the rating of that brand and find all brands with the same rating
-			receipt_rating = brand.rating
-			possible_brands = Brand.where(rating: receipt_rating, is_card: true, is_available:true)
+			possible_brands = Brand.where(rating: brand.rating, category_id: brand.category_id,  is_card: true, is_available:true)
 			print "Use this brand: " + possible_brands.sample.name + "\n"
 			category = Category.find_by id: brand.category_id
 			category_type = category.business_type
 			animal_entries = Category.where(business_type: category_type)
 			if animal_entries[0].price_floor.include?(@receipt.amount.to_s)
-				animal = animal_entries[0].animal
+				animal = animal_entries[0].animal.sample
 				print "Use this animal: " + animal + "\n"
 				redirect_to root_path
-			else animal_entries[1].price_floor.include?(@receipt.amount.to_s)
-				animal = animal_entries[1].animal
+			elsif animal_entries[1].price_floor.include?(@receipt.amount.to_s)
+				animal = animal_entries[1].animal.sample
+				print "Use this animal: " + animal + "\n"
+				redirect_to root_path
+			else animal_entries[2].price_floor.include?(@receipt.amount.to_s)
+				animal = animal_entries[2].animal.sample
 				print "Use this animal: " + animal + "\n"
 				redirect_to root_path
 			end

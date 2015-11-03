@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20151027232804) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "business_type"
-    t.string   "animal"
-    t.string   "price_floor",   default: "--- []\n"
+    t.string   "animal",        default: [], array: true
+    t.string   "price_floor",   default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
