@@ -36,6 +36,7 @@ class ReceiptsController < ApplicationController
 			category = Category.find_by id: brand.category_id
 			category_type = category.business_type
 			animal_entries = Category.where(business_type: category_type)
+			# binding.pry
 			if animal_entries[0].price_floor.include?(@receipt.amount.to_s)
 				animal = animal_entries[0].animal.sample
 				print "Use this animal: " + animal + "\n"
