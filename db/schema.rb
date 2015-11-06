@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20151027232804) do
     t.float    "rating"
     t.text     "snippet"
     t.integer  "yelp_id"
+    t.string   "yelp_category"
     t.boolean  "is_card"
     t.boolean  "is_available"
     t.datetime "created_at"

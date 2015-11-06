@@ -312,50 +312,86 @@
 # Destroys all current brokers
 Brand.destroy_all
 
-brand_data = [
-	{
-	:name=>"La Esquina Corner Deli",
-	:rating=>4.5,
-	:is_card=>true,
-	:is_available=>false,
-	:category_id=>29
-	},
-	{
-	:name=>"Lure Fishbar",
-	:rating=>4.5,
-	:is_card=>true,
-	:is_available=>true,
-	:category_id=>29
-	},
-	{
-	:name=>"Marea",
-	:rating=>4.5,
-	:is_card=>true,
-	:is_available=>false,
-	:category_id=>32
-	},
-	{
-	:name=>"Balthazar Restaurant",
-	:rating=>4.5,
-	:is_card=>true,
-	:is_available=>true,
-	:category_id=>32
-	},
-	{
-	:name=>"The Meatball Shop",
-	:rating=>4.5,
-	:is_card=>true,
-	:is_available=>true,
-	:category_id=>35
-	}
-]
+brands_data = Yelp.client.search('New York')
+brands = brands_data.businesses
+binding.pry
 
-brand_data.each do |brand|
-  Brand.create!({
-    name: brand[:name],
-    rating: brand[:rating],
-    is_card: brand[:is_card],
-    is_available: brand[:is_available],
-    category_id: brand[:category_id]
-  })
+brand_info = brands.map do |brand|
+	category = brand.categories[0][0]
+	name = brand.name
+	phone = brand.phone
+	address = brand.location.display_address
+	location = brand.location.city
+	logo_url = brand.image_url
+	website_url = brand.url
+	rating = brand.rating
+	snippet = brand.snippet_text
+	yelp_id = brand.id
+	is_card = false
+	is_available = false
+
+	brand = {
+		name: name,
+		yelp_category: category,
+		phone: phone,
+		address: address,
+		location: location,
+		logo_url: logo_url,
+		website_url: website_url,
+		rating: rating,
+		snippet: snippet,
+		yelp_id: yelp_id,
+		is_card: is_card,
+		is_available: is_available
+	}
+
+	@brand = Brand.create(brand)
 end
+
+# brand_data = [
+# 	{
+# 	:name=>"La Esquina Corner Deli",
+# 	:rating=>4.5,
+# 	:is_card=>true,
+# 	:is_available=>false,
+# 	:category_id=>29
+# 	},
+# 	{
+# 	:name=>"Lure Fishbar",
+# 	:rating=>4.5,
+# 	:is_card=>true,
+# 	:is_available=>true,
+# 	:category_id=>29
+# 	},
+# 	{
+# 	:name=>"Marea",
+# 	:rating=>4.5,
+# 	:is_card=>true,
+# 	:is_available=>false,
+# 	:category_id=>32
+# 	},
+# 	{
+# 	:name=>"Balthazar Restaurant",
+# 	:rating=>4.5,
+# 	:is_card=>true,
+# 	:is_available=>true,
+# 	:category_id=>32
+# 	},
+# 	{
+# 	:name=>"The Meatball Shop",
+# 	:rating=>4.5,
+# 	:is_card=>true,
+# 	:is_available=>true,
+# 	:category_id=>35
+# 	}
+# ]
+
+# brand_data.each do |brand|
+#   Brand.create!({
+#     name: brand[:name],
+#     rating: brand[:rating],
+#     is_card: brand[:is_card],
+#     is_available: brand[:is_available],
+#     category_id: brand[:category_id]
+#   })
+# end
