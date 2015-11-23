@@ -3,7 +3,8 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
     	t.string  :business_type
     	t.string  :animal, array: true, default: []
-    	t.string  :price_floor, array: true, default: []
+    	t.string	:subcategories, array: true, default: []
+    	t.float   :price_floor
 
     	t.timestamps
     end

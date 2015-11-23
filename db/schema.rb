@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20151027232804) do
     t.text     "snippet"
     t.integer  "yelp_id"
     t.string   "yelp_category"
-    t.boolean  "is_card"
     t.boolean  "is_available"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -39,7 +38,8 @@ ActiveRecord::Schema.define(version: 20151027232804) do
   create_table "categories", force: :cascade do |t|
     t.string   "business_type"
     t.string   "animal",        default: [], array: true
-    t.string   "price_floor",   default: [], array: true
+    t.string   "subcategories", default: [], array: true
+    t.float    "price_floor"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

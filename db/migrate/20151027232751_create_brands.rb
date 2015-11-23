@@ -13,7 +13,6 @@ class CreateBrands < ActiveRecord::Migration
     	t.integer    :yelp_id
         t.integer    :category_id
     	t.string     :yelp_category
-    	t.boolean    :is_card
     	t.boolean    :is_available
 
     	t.timestamps
